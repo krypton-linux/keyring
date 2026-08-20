@@ -1,5 +1,5 @@
 pkgname=krypton-keyring
-pkgver=0.0.0.git
+pkgver=8a6c751
 pkgrel=1
 pkgdesc="Krypton Linux Keyring"
 arch=('any')
@@ -12,9 +12,10 @@ sha512sums=('SKIP')
 
 pkgver() {
     cd "$srcdir/keyring"
-    git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+    git rev-parse --short HEAD
 }
 
 package() {
+    cd $srcdir/keyring
 	make PREFIX=/usr DESTDIR=${pkgdir} install
 }
